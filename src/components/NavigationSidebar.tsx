@@ -45,13 +45,13 @@ function SidebarButton(props: { id: string, icon: any, active: boolean, onClick:
       
       {/* Active Tab Indicator Bubble */}
       {props.active && (
-        <Motion
+        <Motion.div
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ easing: "spring", stiffness: 400, damping: 25 }}
           style={{
             position: "absolute",
-            inset: 0,
+            inset: "0px",
             background: "var(--accent)",
             "border-radius": "var(--radius)",
             "z-index": -1,

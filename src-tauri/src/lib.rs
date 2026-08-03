@@ -33,7 +33,10 @@ pub fn run() {
             mark_app_failed,
             minimize_app_window,
             toggle_maximize_app_window,
-            close_app_window
+            close_app_window,
+            open_session_in_new_window,
+            open_ghost_panel,
+            open_right_sidebar_window
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

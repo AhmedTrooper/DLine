@@ -22,6 +22,8 @@ pub fn run() {
             #[cfg(all(desktop, not(test)))]
             {
                 app::tray::create_tray(app.handle())?;
+                let menu = tauri::menu::Menu::default(app.handle())?;
+                app.set_menu(menu)?;
             }
             Ok(())
         })

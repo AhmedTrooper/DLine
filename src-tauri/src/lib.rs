@@ -14,6 +14,7 @@ pub fn run() {
     let lifecycle_state = AppLifecycleState::new();
 
     tauri::Builder::default()
+        .plugin(tauri_plugin_window_state::Builder::new().build())
         .manage(lifecycle_state)
         .plugin(tauri_plugin_deep_link::init())
         .plugin(tauri_plugin_opener::init())

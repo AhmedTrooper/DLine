@@ -19,7 +19,7 @@ export function TitleBar(props: TitleBarProps) {
       <div class="titlebar-left">
         <Motion.div 
           class="titlebar-brand"
-          whileHover={{ scale: 1.05 }}
+          hover={{ scale: 1.05 }}
           transition={{ easing: "spring", stiffness: 400, damping: 25 }}
         >
           <TerminalSquare size={16} />
@@ -68,7 +68,7 @@ function TitleButton(props: { onClick: () => void, title: string, children: any,
       onMouseLeave={() => setIsHovered(false)}
       title={props.title}
       animate={{ scale: isHovered() ? 1.15 : 1 }}
-      whileTap={{ scale: 0.9 }}
+      press={{ scale: 0.9 }}
       transition={{ easing: "spring", stiffness: 500, damping: 25 }}
     >
       {props.children}

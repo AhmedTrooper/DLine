@@ -12,7 +12,15 @@ impl BootGuardState {
             alive: Arc::new(Mutex::new(false)),
         }
     }
+}
 
+impl Default for BootGuardState {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl BootGuardState {
     pub fn mark_alive(&self) {
         if let Ok(mut alive) = self.alive.lock() {
             *alive = true;

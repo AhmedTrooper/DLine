@@ -14,6 +14,9 @@ pub fn run() {
     let boot_guard_state = app::boot_guard::BootGuardState::new();
 
     tauri::Builder::default()
+        .plugin(tauri_plugin_sql::Builder::new().build())
+        .plugin(tauri_plugin_log::Builder::new().build())
+        .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_autostart::init(
             tauri_plugin_autostart::MacosLauncher::LaunchAgent,
             Some(vec![]),
@@ -40,6 +43,18 @@ pub fn run() {
                 app::tray::create_tray(app.handle())?;
                 let menu = tauri::menu::Menu::default(app.handle())?;
                 app.set_menu(menu)?;
+                app.manage(app::migration::MigrationConfirmState {
+                    pending: std::sync::Arc::new(tokio::sync::Mutex::new(false)),
+                    confirmed: std::sync::Arc::new(tokio::sync::Notify::new()),
+                });
+
+                let app_handle = app.handle().clone();
+                tauri::async_runtime::spawn(async move {
+                    if let Err(e) = app::migration::run_migration(&app_handle).await {
+                        eprintln!("Migration failed: {}", e);
+                    }
+                });
+
                 app::updater::start_update_polling(app.handle().clone());
                 app::ghost::start_ghost_worker(app.handle().clone());
 
@@ -65,7 +80,13 @@ pub fn run() {
             app::updater::check_for_update_now,
             app::updater::apply_update_and_relaunch,
             set_window_vibrancy,
-            get_idle_time
+            get_idle_time,
+            app::fs::atomic_write_file,
+            app::migration::confirm_migration,
+            app::migration::get_migration_state,
+            app::git::git_init,
+            app::git::git_status,
+            app::git::git_commit
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

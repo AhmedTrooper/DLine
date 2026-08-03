@@ -12,6 +12,8 @@
     "window-state:default",
     "updater:default",
     "cli:default",
-    "autostart:default"
+    "autostart:default",
+    "fs:default",
+    "log:default"
   ]
 }

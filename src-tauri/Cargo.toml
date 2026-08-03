@@ -25,6 +25,12 @@ serde_json = "1"
 uuid = { version = "1.8", features = ["v4"] }
 tauri-plugin-deep-link = "2.0.0"
 tokio = { version = "1.53.1", features = ["time"] }
+tauri-plugin-fs = { version = "2", features = ["watch"] }
+tauri-plugin-log = "2.9.0"
+tempfile = "3.27.0"
+tauri-plugin-sql = { version = "2.4.0", features = ["sqlite"] }
+async-recursion = "1.1.1"
+git2 = "0.21.0"
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-autostart = "2"

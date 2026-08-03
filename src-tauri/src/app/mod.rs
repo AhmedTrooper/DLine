@@ -1,6 +1,9 @@
 pub mod boot_guard;
+pub mod fs;
 pub mod ghost;
+pub mod git;
 pub mod lifecycle;
+pub mod migration;
 pub mod tray;
 pub mod updater;
 pub mod window;

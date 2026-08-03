@@ -14,16 +14,19 @@ pub fn run() {
     let lifecycle_state = AppLifecycleState::new();
 
     tauri::Builder::default()
+        .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_window_state::Builder::new().build())
         .manage(lifecycle_state)
         .plugin(tauri_plugin_deep_link::init())
         .plugin(tauri_plugin_opener::init())
+        .plugin(tauri_plugin_updater::Builder::new().build())
         .setup(|app| {
             #[cfg(all(desktop, not(test)))]
             {
                 app::tray::create_tray(app.handle())?;
                 let menu = tauri::menu::Menu::default(app.handle())?;
                 app.set_menu(menu)?;
+                app::updater::start_update_polling(app.handle().clone());
             }
             Ok(())
         })
@@ -38,7 +41,9 @@ pub fn run() {
             close_app_window,
             open_session_in_new_window,
             open_ghost_panel,
-            open_right_sidebar_window
+            open_right_sidebar_window,
+            app::updater::check_for_update_now,
+            app::updater::apply_update_and_relaunch
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

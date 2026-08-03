@@ -25,6 +25,12 @@
   "plugins": {
     "deep-link": {
       "schemes": ["dline"]
+    },
+    "updater": {
+      "endpoints": [
+        "https://api.dline.app/update/{{target}}/{{current_version}}"
+      ],
+      "pubkey": "dline-dummy-pubkey"
     }
   },
   "bundle": {

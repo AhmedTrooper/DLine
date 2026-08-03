@@ -15,6 +15,7 @@ pub fn run() {
 
     tauri::Builder::default()
         .manage(lifecycle_state)
+        .plugin(tauri_plugin_deep_link::init())
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
             greet,

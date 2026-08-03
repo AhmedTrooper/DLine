@@ -18,6 +18,13 @@ pub fn run() {
         .manage(lifecycle_state)
         .plugin(tauri_plugin_deep_link::init())
         .plugin(tauri_plugin_opener::init())
+        .setup(|app| {
+            #[cfg(all(desktop, not(test)))]
+            {
+                app::tray::create_tray(app.handle())?;
+            }
+            Ok(())
+        })
         .invoke_handler(tauri::generate_handler![
             greet,
             get_app_instance_record,

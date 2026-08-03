@@ -1,6 +1,8 @@
 import { createSignal } from "solid-js";
 import { invoke } from "@tauri-apps/api/core";
 import { TabType } from "./NavigationSidebar";
+import { Presence, Motion } from "@motionone/solid";
+import { Send } from "lucide-solid";
 
 interface MainPanelProps {
   activeTab: TabType;
@@ -12,6 +14,7 @@ export function MainPanel(props: MainPanelProps) {
 
   const handleGreet = async (e: Event) => {
     e.preventDefault();
+    if (!greetName().trim()) return;
     try {
       const res = await invoke<string>("greet", { name: greetName() });
       setGreetResponse(res);
@@ -22,70 +25,95 @@ export function MainPanel(props: MainPanelProps) {
 
   return (
     <div class="panel-view">
-      {props.activeTab === 'chat' && (
-        <div class="hero-card">
-          <h2 class="hero-title">Welcome to DLine</h2>
-          <p class="hero-subtitle">
-            A next-generation desktop agentic workspace powered by Tauri v2 and SolidJS.
-            Experience unprecedented performance wrapped in a stunning glassmorphic UI.
-          </p>
-          
-          <form class="form-group" onSubmit={handleGreet}>
-            <input
-              class="input-premium"
-              type="text"
-              placeholder="Test IPC greeting..."
-              value={greetName()}
-              onInput={(e) => setGreetName(e.currentTarget.value)}
-            />
-            <button class="btn-premium" type="submit">
-              Initialize IPC Link
-            </button>
-          </form>
+      <Presence exitBeforeEnter>
+        {props.activeTab === 'chat' && (
+          <Motion
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            class="ui-card"
+          >
+            <h2 class="ui-title">Chat IPC Link</h2>
+            <p class="ui-subtitle">Initialize a connection to the Rust backend.</p>
+            
+            <form class="form-group" onSubmit={handleGreet}>
+              <input
+                class="input-minimal"
+                type="text"
+                placeholder="Enter payload..."
+                value={greetName()}
+                onInput={(e) => setGreetName(e.currentTarget.value)}
+              />
+              <button class="btn-minimal" type="submit" title="Send">
+                <Send size={16} />
+              </button>
+            </form>
 
-          {greetResponse() && (
-            <div class="result-message">
-              {greetResponse()}
-            </div>
-          )}
-        </div>
-      )}
+            {greetResponse() && (
+              <Motion 
+                initial={{ opacity: 0, height: 0 }} 
+                animate={{ opacity: 1, height: "auto" }} 
+                class="result-message"
+              >
+                {greetResponse()}
+              </Motion>
+            )}
+          </Motion>
+        )}
 
-      {props.activeTab === 'files' && (
-        <div class="hero-card">
-          <h2 class="hero-title">File Browser</h2>
-          <p class="hero-subtitle">
-            Navigate through your workspace with unparalleled speed.
-          </p>
-        </div>
-      )}
+        {props.activeTab === 'files' && (
+          <Motion
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            class="ui-card"
+          >
+            <h2 class="ui-title">Files</h2>
+            <p class="ui-subtitle">Workspace browser.</p>
+          </Motion>
+        )}
 
-      {props.activeTab === 'terminal' && (
-        <div class="hero-card">
-          <h2 class="hero-title">Terminal Emulator</h2>
-          <p class="hero-subtitle">
-            Integrated high-performance shell session.
-          </p>
-        </div>
-      )}
+        {props.activeTab === 'terminal' && (
+          <Motion
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            class="ui-card"
+          >
+            <h2 class="ui-title">Terminal</h2>
+            <p class="ui-subtitle">Integrated shell session.</p>
+          </Motion>
+        )}
 
-      {props.activeTab === 'island' && (
-        <div class="hero-card">
-          <h2 class="hero-title">Agent Island</h2>
-          <p class="hero-subtitle">
-            Configure your AI companion's appearance, behavior, and voice modules.
-          </p>
-        </div>
-      )}
+        {props.activeTab === 'island' && (
+          <Motion
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            class="ui-card"
+          >
+            <h2 class="ui-title">Agent Island</h2>
+            <p class="ui-subtitle">Configuration and state.</p>
+          </Motion>
+        )}
 
-      {props.activeTab === 'settings' && (
-        <div class="hero-card">
-          <h2 class="hero-title">Preferences</h2>
-          <p class="hero-subtitle">
-            Tune your experience. Adjust themes, manage keys, and tweak system performance.
-          </p>
-        </div>
-      )}
+        {props.activeTab === 'settings' && (
+          <Motion
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            class="ui-card"
+          >
+            <h2 class="ui-title">Settings</h2>
+            <p class="ui-subtitle">Manage preferences.</p>
+          </Motion>
+        )}
+      </Presence>
     </div>
   );
 }

@@ -15,8 +15,14 @@ interface InstanceRecord {
 function App() {
   const [activeTab, setActiveTab] = createSignal<TabType>("chat");
   const [appStatus, setAppStatus] = createSignal<string>("starting");
+  const [isDark, setIsDark] = createSignal<boolean>(true);
 
   onMount(async () => {
+    // Set initial theme
+    if (isDark()) {
+      document.documentElement.classList.add('dark');
+    }
+
     try {
       const record = await invoke<InstanceRecord>("get_app_instance_record");
       if (record && record.status) {
@@ -34,38 +40,33 @@ function App() {
     }
   });
 
+  const toggleTheme = () => {
+    setIsDark(!isDark());
+    document.documentElement.classList.toggle('dark');
+  };
+
   return (
-    <>
-      {/* Stunning Animated Background */}
-      <div class="app-background">
-        <div class="bg-orb orb-1"></div>
-        <div class="bg-orb orb-2"></div>
+    <div class="app-root">
+      <TitleBar status={appStatus()} toggleTheme={toggleTheme} isDark={isDark()} />
+
+      <div class="app-container">
+        <NavigationSidebar activeTab={activeTab()} setActiveTab={setActiveTab} />
+
+        <main class="main-workspace">
+          <header class="workspace-header">
+            <div class="breadcrumb-path">
+              <span>DLine</span>
+              <span>/</span>
+              <span class="breadcrumb-active">{activeTab().toUpperCase()}</span>
+            </div>
+
+            <AgentIslandWidget />
+          </header>
+
+          <MainPanel activeTab={activeTab()} />
+        </main>
       </div>
-
-      <div class="app-root">
-        <TitleBar status={appStatus()} />
-
-        <div class="app-container">
-          <NavigationSidebar activeTab={activeTab()} setActiveTab={setActiveTab} />
-
-          <main class="main-workspace glass-panel">
-            <header class="workspace-header">
-              <div class="breadcrumb-path">
-                <span>DLine</span>
-                <span>/</span>
-                <span class="breadcrumb-active">{activeTab().toUpperCase()}</span>
-              </div>
-
-              <div class="workspace-actions">
-                <AgentIslandWidget />
-              </div>
-            </header>
-
-            <MainPanel activeTab={activeTab()} />
-          </main>
-        </div>
-      </div>
-    </>
+    </div>
   );
 }
 

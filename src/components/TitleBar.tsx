@@ -23,7 +23,6 @@ export function TitleBar(props: TitleBarProps) {
           transition={{ easing: "spring", stiffness: 400, damping: 25 }}
         >
           <TerminalSquare size={16} />
-          <span>DLine</span>
         </Motion.div>
         
         <Motion.div 
@@ -31,14 +30,13 @@ export function TitleBar(props: TitleBarProps) {
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
+          title={props.status}
         >
           <span class={`status-dot ${props.status}`} />
-          <span>{props.status}</span>
         </Motion.div>
       </div>
 
       <div class="titlebar-center">
-        <span>TAURI V2</span>
       </div>
 
       <div class="titlebar-controls">

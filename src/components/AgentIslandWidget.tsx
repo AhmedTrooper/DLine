@@ -20,7 +20,6 @@ export function AgentIslandWidget() {
         }}
         transition={{ duration: 0.5, easing: "ease-in-out" }}
       />
-      <span>DLine Island • Standby</span>
     </Motion.div>
   );
 }

@@ -54,12 +54,7 @@ function App() {
 
         <main class="main-workspace">
           <header class="workspace-header">
-            <div class="breadcrumb-path">
-              <span>DLine</span>
-              <span>/</span>
-              <span class="breadcrumb-active">{activeTab().toUpperCase()}</span>
-            </div>
-
+            <div class="breadcrumb-path"></div>
             <AgentIslandWidget />
           </header>
 

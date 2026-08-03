@@ -172,10 +172,10 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 6px 14px 6px 6px;
+  padding: 6px;
   background: var(--secondary);
   border: 1px solid var(--border);
-  border-radius: 9999px;
+  border-radius: 50%;
   font-size: 13px;
   font-weight: 500;
   color: var(--secondary-foreground);

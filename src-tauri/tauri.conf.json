@@ -24,7 +24,7 @@
   },
   "plugins": {
     "deep-link": {
-      "schemes": ["cindy", "xdt-maker"]
+      "schemes": ["dline"]
     }
   },
   "bundle": {

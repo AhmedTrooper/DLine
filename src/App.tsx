@@ -35,29 +35,37 @@ function App() {
   });
 
   return (
-    <div class="app-root">
-      <TitleBar status={appStatus()} />
-
-      <div class="app-container">
-        <NavigationSidebar activeTab={activeTab()} setActiveTab={setActiveTab} />
-
-        <main class="main-workspace">
-          <header class="workspace-header">
-            <div class="breadcrumb-path">
-              <span>DLine Workspace</span>
-              <span>/</span>
-              <span class="breadcrumb-active">{activeTab().toUpperCase()}</span>
-            </div>
-
-            <div class="workspace-actions">
-              <AgentIslandWidget />
-            </div>
-          </header>
-
-          <MainPanel activeTab={activeTab()} />
-        </main>
+    <>
+      {/* Stunning Animated Background */}
+      <div class="app-background">
+        <div class="bg-orb orb-1"></div>
+        <div class="bg-orb orb-2"></div>
       </div>
-    </div>
+
+      <div class="app-root">
+        <TitleBar status={appStatus()} />
+
+        <div class="app-container">
+          <NavigationSidebar activeTab={activeTab()} setActiveTab={setActiveTab} />
+
+          <main class="main-workspace glass-panel">
+            <header class="workspace-header">
+              <div class="breadcrumb-path">
+                <span>DLine</span>
+                <span>/</span>
+                <span class="breadcrumb-active">{activeTab().toUpperCase()}</span>
+              </div>
+
+              <div class="workspace-actions">
+                <AgentIslandWidget />
+              </div>
+            </header>
+
+            <MainPanel activeTab={activeTab()} />
+          </main>
+        </div>
+      </div>
+    </>
   );
 }
 

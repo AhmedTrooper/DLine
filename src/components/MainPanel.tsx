@@ -23,56 +23,67 @@ export function MainPanel(props: MainPanelProps) {
   return (
     <div class="panel-view">
       {props.activeTab === 'chat' && (
-        <div class="glass-card">
-          <h2>🤖 DLine AI Agent Workspace</h2>
-          <p>Next-generation high-performance desktop environment powered by Tauri v2 Rust runtime and SolidJS frontend.</p>
+        <div class="hero-card">
+          <h2 class="hero-title">Welcome to DLine</h2>
+          <p class="hero-subtitle">
+            A next-generation desktop agentic workspace powered by Tauri v2 and SolidJS.
+            Experience unprecedented performance wrapped in a stunning glassmorphic UI.
+          </p>
           
-          <form style={{ "margin-top": "20px", display: "flex", gap: "10px" }} onSubmit={handleGreet}>
+          <form class="form-group" onSubmit={handleGreet}>
             <input
-              class="input-field"
+              class="input-premium"
               type="text"
               placeholder="Test IPC greeting..."
               value={greetName()}
               onInput={(e) => setGreetName(e.currentTarget.value)}
             />
-            <button class="btn-primary" type="submit">
-              Send IPC Command
+            <button class="btn-premium" type="submit">
+              Initialize IPC Link
             </button>
           </form>
 
           {greetResponse() && (
-            <p style={{ "margin-top": "14px", color: "#a5b4fc", "font-weight": "500" }}>
+            <div class="result-message">
               {greetResponse()}
-            </p>
+            </div>
           )}
         </div>
       )}
 
       {props.activeTab === 'files' && (
-        <div class="glass-card">
-          <h2>📁 Workspace File Browser</h2>
-          <p>Browse workspace directory files, inspect diffs, preview media, and manage project code.</p>
+        <div class="hero-card">
+          <h2 class="hero-title">File Browser</h2>
+          <p class="hero-subtitle">
+            Navigate through your workspace with unparalleled speed.
+          </p>
         </div>
       )}
 
       {props.activeTab === 'terminal' && (
-        <div class="glass-card">
-          <h2>💻 Terminal Emulator</h2>
-          <p>Integrated terminal session for executing shell commands and background tasks.</p>
+        <div class="hero-card">
+          <h2 class="hero-title">Terminal Emulator</h2>
+          <p class="hero-subtitle">
+            Integrated high-performance shell session.
+          </p>
         </div>
       )}
 
       {props.activeTab === 'island' && (
-        <div class="glass-card">
-          <h2>🏝️ Agent Island Mascot</h2>
-          <p>Floating mascot dynamic overlay, customizable skins, and audio feedback notifications.</p>
+        <div class="hero-card">
+          <h2 class="hero-title">Agent Island</h2>
+          <p class="hero-subtitle">
+            Configure your AI companion's appearance, behavior, and voice modules.
+          </p>
         </div>
       )}
 
       {props.activeTab === 'settings' && (
-        <div class="glass-card">
-          <h2>⚙️ Preferences & Security</h2>
-          <p>Manage API keys, model parameters, local database backups, and interface themes.</p>
+        <div class="hero-card">
+          <h2 class="hero-title">Preferences</h2>
+          <p class="hero-subtitle">
+            Tune your experience. Adjust themes, manage keys, and tweak system performance.
+          </p>
         </div>
       )}
     </div>

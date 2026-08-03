@@ -1,5 +1,5 @@
-/dist/
-/target/
-/Cargo.lock
+node_modules
+dist
 focus/
 AGENTS.md
+tool.md

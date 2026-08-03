@@ -1,14 +1,31 @@
-// Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
+pub mod app;
+pub mod commands;
+
+use app::lifecycle::AppLifecycleState;
+use commands::app_commands::*;
+
 #[tauri::command]
 fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
+    format!("Hello, {}! Welcome to DLine.", name)
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    let lifecycle_state = AppLifecycleState::new();
+
     tauri::Builder::default()
+        .manage(lifecycle_state)
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![greet])
+        .invoke_handler(tauri::generate_handler![
+            greet,
+            get_app_instance_record,
+            mark_app_window_ready,
+            mark_app_ready,
+            mark_app_failed,
+            minimize_app_window,
+            toggle_maximize_app_window,
+            close_app_window
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

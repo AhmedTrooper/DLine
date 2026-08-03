@@ -34,34 +34,34 @@
 }
 
 .dark {
-  /* Linear / Vercel Dark Theme - Deep & Sophisticated */
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  /* Greenish-Bluish Deep Dark Theme */
+  --background: #09151A;
+  --foreground: #e2e8f0;
 
-  --card: #111111;
-  --card-foreground: #ededed;
+  --card: #0F1E25;
+  --card-foreground: #e2e8f0;
 
-  --popover: #111111;
-  --popover-foreground: #ededed;
+  --popover: #0F1E25;
+  --popover-foreground: #e2e8f0;
 
-  --primary: #ededed;
-  --primary-foreground: #0a0a0a;
+  --primary: #5eead4;
+  --primary-foreground: #042f2e;
 
-  --secondary: #1a1a1a;
-  --secondary-foreground: #ededed;
+  --secondary: #172B33;
+  --secondary-foreground: #e2e8f0;
 
-  --muted: #111111;
-  --muted-foreground: #a1a1aa;
+  --muted: #0F1E25;
+  --muted-foreground: #94a3b8;
 
-  --accent: #1f1f1f;
-  --accent-foreground: #ededed;
+  --accent: #172B33;
+  --accent-foreground: #5eead4;
 
-  --destructive: #e5484d;
-  --destructive-foreground: #ededed;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
 
-  --border: #222222;
-  --input: #222222;
-  --ring: #888888;
+  --border: #1F3842;
+  --input: #1F3842;
+  --ring: #5eead4;
 }
 
 * {

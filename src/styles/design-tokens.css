@@ -1,65 +1,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
+  /* Linear / Vercel Light Theme */
   --background: #ffffff;
-  --foreground: #09090b;
+  --foreground: #111111;
 
   --card: #ffffff;
-  --card-foreground: #09090b;
+  --card-foreground: #111111;
 
   --popover: #ffffff;
-  --popover-foreground: #09090b;
+  --popover-foreground: #111111;
 
-  --primary: #18181b;
-  --primary-foreground: #fafafa;
+  --primary: #111111;
+  --primary-foreground: #ffffff;
 
   --secondary: #f4f4f5;
-  --secondary-foreground: #18181b;
+  --secondary-foreground: #111111;
 
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
+  --muted: #fafafa;
+  --muted-foreground: #666666;
 
   --accent: #f4f4f5;
-  --accent-foreground: #18181b;
+  --accent-foreground: #111111;
 
-  --destructive: #ef4444;
-  --destructive-foreground: #fafafa;
+  --destructive: #e00;
+  --destructive-foreground: #ffffff;
 
-  --border: #e4e4e7;
-  --input: #e4e4e7;
-  --ring: #18181b;
+  --border: #eaeaea;
+  --input: #eaeaea;
+  --ring: #111111;
 
-  --radius: 0.5rem;
+  --radius: 8px;
 }
 
 .dark {
-  --background: #09090b;
-  --foreground: #fafafa;
+  /* Linear / Vercel Dark Theme - Deep & Sophisticated */
+  --background: #0a0a0a;
+  --foreground: #ededed;
 
-  --card: #09090b;
-  --card-foreground: #fafafa;
+  --card: #111111;
+  --card-foreground: #ededed;
 
-  --popover: #09090b;
-  --popover-foreground: #fafafa;
+  --popover: #111111;
+  --popover-foreground: #ededed;
 
-  --primary: #fafafa;
-  --primary-foreground: #18181b;
+  --primary: #ededed;
+  --primary-foreground: #0a0a0a;
 
-  --secondary: #27272a;
-  --secondary-foreground: #fafafa;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #ededed;
 
-  --muted: #27272a;
+  --muted: #111111;
   --muted-foreground: #a1a1aa;
 
-  --accent: #27272a;
-  --accent-foreground: #fafafa;
+  --accent: #1f1f1f;
+  --accent-foreground: #ededed;
 
-  --destructive: #7f1d1d;
-  --destructive-foreground: #fafafa;
+  --destructive: #e5484d;
+  --destructive-foreground: #ededed;
 
-  --border: #27272a;
-  --input: #27272a;
-  --ring: #d4d4d8;
+  --border: #222222;
+  --input: #222222;
+  --ring: #888888;
 }
 
 * {

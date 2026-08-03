@@ -2,7 +2,7 @@ import { createSignal } from "solid-js";
 import { invoke } from "@tauri-apps/api/core";
 import { TabType } from "./NavigationSidebar";
 import { Presence, Motion } from "@motionone/solid";
-import { Send } from "lucide-solid";
+import { Send, Settings, Bot, Terminal, Folder } from "lucide-solid";
 
 interface MainPanelProps {
   activeTab: TabType;
@@ -28,32 +28,39 @@ export function MainPanel(props: MainPanelProps) {
       <Presence exitBeforeEnter>
         {props.activeTab === 'chat' && (
           <Motion
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, scale: 0.95, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.98, y: -10 }}
+            transition={{ easing: "spring", stiffness: 300, damping: 25 }}
             class="ui-card"
           >
-            <h2 class="ui-title">Chat IPC Link</h2>
-            <p class="ui-subtitle">Initialize a connection to the Rust backend.</p>
+            <h2 class="ui-title">System Communication</h2>
+            <p class="ui-subtitle">Initialize a low-level IPC socket payload to the Rust backend.</p>
             
             <form class="form-group" onSubmit={handleGreet}>
               <input
                 class="input-minimal"
                 type="text"
-                placeholder="Enter payload..."
+                placeholder="Enter payload data..."
                 value={greetName()}
                 onInput={(e) => setGreetName(e.currentTarget.value)}
               />
-              <button class="btn-minimal" type="submit" title="Send">
+              <Motion.button 
+                class="btn-minimal" 
+                type="submit" 
+                title="Transmit"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Send size={16} />
-              </button>
+              </Motion.button>
             </form>
 
             {greetResponse() && (
               <Motion 
-                initial={{ opacity: 0, height: 0 }} 
-                animate={{ opacity: 1, height: "auto" }} 
+                initial={{ opacity: 0, y: -10, height: 0 }} 
+                animate={{ opacity: 1, y: 0, height: "auto" }}
+                transition={{ easing: "spring", stiffness: 400, damping: 25 }}
                 class="result-message"
               >
                 {greetResponse()}
@@ -64,53 +71,57 @@ export function MainPanel(props: MainPanelProps) {
 
         {props.activeTab === 'files' && (
           <Motion
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, scale: 0.95, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.98, y: -10 }}
+            transition={{ easing: "spring", stiffness: 300, damping: 25 }}
             class="ui-card"
           >
-            <h2 class="ui-title">Files</h2>
-            <p class="ui-subtitle">Workspace browser.</p>
+            <Folder size={32} class="mb-4" />
+            <h2 class="ui-title">Workspace Index</h2>
+            <p class="ui-subtitle">Local file system mapping.</p>
           </Motion>
         )}
 
         {props.activeTab === 'terminal' && (
           <Motion
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, scale: 0.95, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.98, y: -10 }}
+            transition={{ easing: "spring", stiffness: 300, damping: 25 }}
             class="ui-card"
           >
-            <h2 class="ui-title">Terminal</h2>
-            <p class="ui-subtitle">Integrated shell session.</p>
+            <Terminal size={32} class="mb-4" />
+            <h2 class="ui-title">Terminal Process</h2>
+            <p class="ui-subtitle">TTY interface active.</p>
           </Motion>
         )}
 
         {props.activeTab === 'island' && (
           <Motion
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, scale: 0.95, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.98, y: -10 }}
+            transition={{ easing: "spring", stiffness: 300, damping: 25 }}
             class="ui-card"
           >
-            <h2 class="ui-title">Agent Island</h2>
-            <p class="ui-subtitle">Configuration and state.</p>
+            <Bot size={32} class="mb-4" />
+            <h2 class="ui-title">Agent State</h2>
+            <p class="ui-subtitle">Configuration parameters for autonomous procedures.</p>
           </Motion>
         )}
 
         {props.activeTab === 'settings' && (
           <Motion
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, scale: 0.95, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.98, y: -10 }}
+            transition={{ easing: "spring", stiffness: 300, damping: 25 }}
             class="ui-card"
           >
-            <h2 class="ui-title">Settings</h2>
-            <p class="ui-subtitle">Manage preferences.</p>
+            <Settings size={32} class="mb-4" />
+            <h2 class="ui-title">Engine Preferences</h2>
+            <p class="ui-subtitle">System tunings and display metrics.</p>
           </Motion>
         )}
       </Presence>

@@ -31,6 +31,17 @@
         "https://api.dline.app/update/{{target}}/{{current_version}}"
       ],
       "pubkey": "dline-dummy-pubkey"
+    },
+    "cli": {
+      "description": "DLine CLI",
+      "longDescription": "The DLine desktop app CLI launcher.",
+      "args": [
+        {
+          "name": "path",
+          "index": 1,
+          "description": "The path to open as a working directory."
+        }
+      ]
     }
   },
   "bundle": {

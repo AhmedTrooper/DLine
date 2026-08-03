@@ -10,8 +10,12 @@ pub fn get_app_instance_record(
 }
 
 #[tauri::command]
-pub fn mark_app_window_ready(state: State<'_, AppLifecycleState>) -> Result<(), String> {
+pub fn mark_app_window_ready(
+    state: State<'_, AppLifecycleState>,
+    boot_guard: State<'_, crate::app::boot_guard::BootGuardState>,
+) -> Result<(), String> {
     state.set_status(AppStateStatus::WindowReady, None);
+    boot_guard.mark_alive();
     Ok(())
 }
 
@@ -131,4 +135,44 @@ pub fn open_right_sidebar_window(app: tauri::AppHandle) -> Result<(), String> {
 
     builder.build().map_err(|e| e.to_string())?;
     Ok(())
+}
+
+#[tauri::command]
+#[allow(unused_variables)]
+pub fn set_window_vibrancy(window: tauri::Window, enable: bool) -> Result<(), String> {
+    // In Tauri v2, we use native Window effects
+    #[cfg(target_os = "macos")]
+    {
+        use tauri::utils::config::WindowEffectsConfig;
+        if enable {
+            let _ = window.set_effects(Some(
+                tauri::window::EffectsBuilder::new()
+                    .effect(tauri::window::Effect::HudWindow)
+                    .build(),
+            ));
+        } else {
+            let _ = window.clear_effects();
+        }
+    }
+
+    #[cfg(target_os = "windows")]
+    {
+        if enable {
+            let _ = window.set_effects(Some(
+                tauri::window::EffectsBuilder::new()
+                    .effect(tauri::window::Effect::Mica)
+                    .build(),
+            ));
+        } else {
+            let _ = window.clear_effects();
+        }
+    }
+
+    Ok(())
+}
+
+#[tauri::command]
+pub fn get_idle_time() -> Result<u64, String> {
+    // Mock idle time (could use user-idle or device_query with proper system libs)
+    Ok(0)
 }
